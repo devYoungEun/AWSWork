@@ -1,6 +1,7 @@
 package com.mega.it.springboot.web;
 
 import com.mega.it.springboot.service.posts.PostsService;
+import com.mega.it.springboot.web.dto.PostsResponseDto;
 import com.mega.it.springboot.web.dto.PostsSaveRequestDto;
 import com.mega.it.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,14 @@ public class PostsApiController {
     @PutMapping("/api/v1/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
         return postsService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public PostsResponseDto findById(@PathVariable Long id) { return postsService.findById(id); }
+
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(@PathVariable Long id){
+        postsService.delete(id);
+        return id;
     }
 }
